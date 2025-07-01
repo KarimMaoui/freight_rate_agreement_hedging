@@ -40,3 +40,36 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+from sensitivity_analysis import run_fra_scenario
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+initial_rates = [12000, 14000, 16000, 18000]
+volatilities = [0.10, 0.20, 0.30, 0.40]
+maturities = [0.08, 0.25, 0.5]  # (1M, 3M, 6M)
+
+results = []
+
+for S0 in initial_rates:
+    for sigma in volatilities:
+        for T_fra in maturities:
+            pnl_mean, pnl_std = run_fra_scenario(S0, sigma, T_fra)
+            results.append({
+                'Initial Rate': S0,
+                'Volatility': sigma,
+                'Maturity': T_fra,
+                'Avg PnL': pnl_mean,
+                'PnL StdDev': pnl_std
+            })
+
+df = pd.DataFrame(results)
+
+# Heatmap sur l’Avg PnL (fixe Maturity = 0.25)
+subset = df[df['Maturity'] == 0.25].pivot(index='Initial Rate', columns='Volatility', values='Avg PnL')
+plt.figure(figsize=(8,6))
+sns.heatmap(subset, annot=True, fmt=".0f", cmap='coolwarm')
+plt.title('Average FRA PnL — Maturity = 3M')
+plt.xlabel('Volatility')
+plt.ylabel('Initial Rate')
+plt.show()
