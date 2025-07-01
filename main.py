@@ -27,7 +27,7 @@ plt.show()
 realized_rates = paths[:, eval_day]
 unhedged = calculate_unhedged_cost(realized_rates, notional, duration_years)
 hedged = calculate_total_hedged_cost(realized_rates, strike_rate, notional, duration_years)
-
+print(hedged,unhedged)
 plt.figure(figsize=(10,5))
 plt.hist(unhedged, bins=40, alpha=0.6, label='Unhedged Cost', color='red')
 plt.hist(hedged, bins=40, alpha=0.6, label='Hedged Cost (FRA)', color='green')
