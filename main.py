@@ -14,7 +14,7 @@ paths = simulate_freight_paths(S0=15000, mu=0.0, sigma=0.25, T=0.25, dt=1/252, n
 strike_rate = 14500       # taux fixe convenu dans le contrat
 notional = 100            # par ex. 100 jours de location
 duration_years = 1/12     # équivalent à 1 mois
-eval_day = 21             # date d’observation des taux (~1 mois)
+eval_day = int(duration_years * 252) - 1
 
 # 3. Calcul du PnL sur les trajectoires simulées
 pnl = simulate_fra_pnl(paths, strike_rate, notional, duration_years, eval_day)
