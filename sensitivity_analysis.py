@@ -7,7 +7,8 @@ def run_fra_scenario(S0, sigma, T, strike_rate=14500, notional=100, duration=1/1
     Simule un scénario de couverture FRA et retourne la moyenne et la vol du PnL
     """
     if eval_day is None:
-        eval_day = int(T * 252)
+        eval_day = int(duration * 252) - 1
+
 
     paths = simulate_freight_paths(S0=S0, sigma=sigma, T=T, dt=1/252, n_paths=1000)
     pnl = simulate_fra_pnl(paths, strike_rate, notional, duration, eval_day)
