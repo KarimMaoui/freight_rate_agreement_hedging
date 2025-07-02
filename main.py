@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 from freight_simulation import simulate_freight_paths
 from fra_pricing import simulate_fra_pnl, calculate_unhedged_cost, calculate_total_hedged_cost
 
+from sensitivity_analysis import run_fra_scenario
+import pandas as pd
+import seaborn as sns
+
 # 1. Simulation des trajectoires de taux de fret
 paths = simulate_freight_paths(S0=15000, mu=0.0, sigma=0.25, T=0.25, dt=1/252, n_paths=1000)
 
@@ -40,10 +44,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-from sensitivity_analysis import run_fra_scenario
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+
 
 initial_rates = [12000, 14000, 16000, 18000]
 volatilities = [0.10, 0.20, 0.30, 0.40]
