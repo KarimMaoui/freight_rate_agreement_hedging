@@ -73,3 +73,28 @@ plt.title('Average FRA PnL — Maturity = 3M')
 plt.xlabel('Volatility')
 plt.ylabel('Initial Rate')
 plt.show()
+
+
+# Simule différentes valeurs spot réalisées
+spot_range = np.linspace(13000, 17000, 100)
+notional = 1_200_000
+delta = 30 / 360
+fra_rate = 15000  # Strike du FRA
+
+# Coût sans couverture = spot * notional * delta
+unhedged_costs = spot_range * notional * delta
+
+# Coût avec FRA = hedgé à taux fixe
+hedged_costs = fra_rate * notional * delta * np.ones_like(spot_range)
+
+# Plot
+plt.figure(figsize=(10, 6))
+plt.plot(spot_range, unhedged_costs, label='Unhedged Cost (Exposed)', color='red')
+plt.plot(spot_range, hedged_costs, label='Hedged Cost (FRA @ 15,000)', color='green', linestyle='--')
+plt.title('📉 Hedging Efficiency — Cost vs Spot Freight Rate')
+plt.xlabel('Realized Spot Rate ($/day)')
+plt.ylabel('Total Cost ($)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
