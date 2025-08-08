@@ -1,12 +1,12 @@
-# Freight Rate Agreement Hedging Simulation 📈🚢
+# Freight Rate Agreement Hedging Simulation 
 
 This Python project simulates the performance of Freight Rate Agreements (FRAs) as hedging instruments against freight rate volatility. It models freight rate paths, applies FRA contracts, and evaluates their P&L impact under various market conditions.
 
-## 🌍 Use Case
+##  Use Case
 
 Shipping companies and commodity traders are exposed to fluctuations in freight rates. This project models how FRA contracts can hedge such exposure.
 
-## 🛠️ Project Structure
+##  Project Structure
 
 freight_rate_agreement_hedging/
 ├── main.py # Run a full simulation and visualize results
